@@ -9,14 +9,15 @@ export default function Results() {
     const location=useLocation(); 
     
     useEffect(() => {
-        if (searchTerm !== '') {
-          if (location.pathname === '/videos') {
-            getResults(`/search/q=${searchTerm} videos`);
-          } else {
-            getResults(`${location.pathname}/q=${searchTerm}&num=40`);
-          }
+      if (searchTerm !== '') {
+        if (location.pathname === '/videos') {
+          getResults(`/search/q=${searchTerm} videos`);
+        } else {
+          getResults(`${location.pathname}/q=${searchTerm}&num=40`);
         }
-      }, [searchTerm, location.pathname]);
+      }
+    }, [searchTerm, location.pathname]);
+  
     
     if(isLoading)
     return <Loading/>
@@ -64,9 +65,9 @@ export default function Results() {
       case '/videos':
         return (
           <div className="flex flex-wrap ">
-            {results?.results?.map((video, index) => (
-              <div key={index} className="p-2">
-                <ReactPlayer url={video.additional_links?.[0].href} controls width="355px" height="200px" />
+            {results?.videos.map((video) => (
+              <div className="p-2">
+              {video.href && <ReactPlayer url={video.href} controls width="355px" height="200px" />}
               </div>
             ))}
           </div>

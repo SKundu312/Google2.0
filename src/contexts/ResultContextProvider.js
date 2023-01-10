@@ -11,12 +11,13 @@ export const ResultContextProvider=({children})=>{
     //videos/search/images
     const getResults=async(type)=>{
         setIsLoading(true);
-        const response=await fetch(`${baseURL}${type}`,{
+        const response=await fetch('data.json',{
             method: 'GET',
             headers: {
-                'x-user-agent': 'desktop',
-                'x-rapidapi-host': 'google-search3.p.rapidapi.com',
-                'x-rapidapi-key': 'b04d326df4msheb0ca5785e70cb9p19e862jsnd4f247d01d92'
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "http://localhost:3000/videos",
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
               }
         })
         const data=await response.json();
